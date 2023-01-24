@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./asset/css/reset.css" />
+  <link rel="stylesheet" href="./asset/css/style.css" />
+<title>Quiz!</title>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <ul id="navBar" class="navigation">
+        <li id="navScore">View High Scores</li>
+        <li id="timer">Time: <span id="timeLeft">100</span></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="startPage">
+      <h1>Quiz!</h1>
+      <p>Click the button below to test your knowlege</p>
+      <button id="startButton">Start</button>
+
+    </section>
+
+    <section class="questionPage" id="q-1" style="display: none;">
+      <h1>#1:</h1>
+      <ul>
+        <li value="correct"></li>
+        <li value="incorrect"></li>
+        <li value="incorrect"></li>
+        <li value="incorrect"></li>
+      </ul>
+    </section>
+
+    <section class="questionPage" id="q-2" style="display: none;">
+      <h1>#2: </h1>
+      <ul>
+        <li value="incorrect"></li>
+        <li value="incorrect"></li>
+        <li value="correct"></li>
+        <li value="incorrect"></li>
+      </ul>
+    </section>
+
+    <section class="questionPage" id="q-3" style="display: none;">
+      <h1>#3:</h1>
+      <ul>
+        <li value="incorrect"></li>
+        <li value="incorrect"></li>
+        <li value="incorrect"></li>
+        <li value="correct"></li>
+      </ul>
+    </section>
+
+    <section class="questionPage" id="q-4" style="display: none;">
+      <h1>#4: </h1>
+      <ul>
+        <li value="correct"></li>
+        <li value="incorrect"></li>
+        <li value="incorrect"></li>
+        <li value="incorrect"></li>
+      </ul>
+    </section>
+
+    <section class="questionPage" id="q-5" style="display: none;">
+      <h1>#5:</h1>
+      <ul>
+        <li value="incorrect"></li>
+        <li value="incorrect"></li>
+        <li value="correct"></li>
+        <li value="incorrect"></li>
+      </ul>
+    </section>
+
+    <section id="recordScore" style="display: none;">
+      <h1>Well Done</h1>
+      <form>
+        <label for="enterName">Enter Your Name:</label>
+        <textarea name="enterName" id="enterName" placeholder="enter your name"></textarea>
+      </form>
+      <button id="submitButton">Submit</button>
+    </section>
+
+    <section id="scoreBoard" style="display: none;">
+      <h1>High Scores</h1>
+
+      <ul id="playerScore"></ul>
+
+      <button id="goBack">Go Back</button>
+      <button id="clearScore">Clear High Scores</button>
+
+    </section>
+
+
+  </main>
+
+  <script src="./asset/js/script.js"></script>
+
+</body>
+
+</html>
