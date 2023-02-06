@@ -117,7 +117,7 @@ var loadHighScore = function () {
       var highscoreEl = document.createElement("li");
       highscoreEl.ClassName = "high-score";
       highscoreEl.innerText = LoadedHighScores[i].initials + " - " + LoadedHighScores[i].score;
-      listHighScoreEl.appendChild(highscoreEl);
+      scoreEl.appendChild(highscoreEl);
 
       HighScores.push(LoadedHighScores[i]);
       
