@@ -11,11 +11,36 @@ var scoreEl = document.getElementById('scoreBoard')
 var goBackEl = document.getElementById('goBack')
 var clearEl = document.getElementById('clearScore')
 var playerScoreEl = document.getElementById('playerScore')
+var nameButton = document.getElementById('nameButton')
+var navScore = document.getElementById('navScore')
+var backButton = document.getElementById('goBack')
 var score=0;
 var timeleft;
 var gameover;
 var HighScores = [];
+var QuestionIndex = 0
 timerEl.innertext= 0
+
+var renderStartPage = function () {
+  recordEl.classList.add("hide")
+  recordEl.classList.remove("show")
+ startPageEl.classList.remove("hide")
+  startPageEl.classList.add("show")
+  scoreEl.removeChild(scoreEl.lastChild)
+  QuestionIndex = 0
+  gameover = ""
+  timerEl.textContent = 0 
+  score = 0
+
+  if (correctEl.className = "show") {
+      correctEl.classList.remove("show");
+      correctEl.classList.add("hide")
+  }
+  if (inCorrectEl.className = "show") {
+      inCorrectEl.classList.remove("show");
+      inCorrectEl.classList.add("hide");
+  }
+}
 
 
 var questions = [
@@ -168,3 +193,12 @@ var clearScores = function () {
 
 loadHighScore()
 
+startEl.addEventListener("click", startGame)
+      //on submit button -- enter or click
+      nameButton.addEventListener("submit", CreateHighScore)
+      //when view high-scores is clicked
+      navScore.addEventListener("click", displayHighScores)
+      //Go back button
+      backButton.addEventListener("click", renderStartPage)
+      //clear scores button
+      clearEl.addEventListener("click", clearScores)
