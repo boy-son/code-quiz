@@ -1,3 +1,5 @@
+var startPageEl = document.getElementById('startPage');
+var qPageEl = document.getElementById('questionPage');
 var timerEl = document.getElementById('timer');
 var correctEl = document.getElementById('correct')
 var inCorrectEl = document.getElementById('incorrect')
@@ -12,7 +14,7 @@ var playerScoreEl = document.getElementById('playerScore')
 var score=0;
 var timeleft;
 var gameover;
-var HighScore = [];
+var HighScores = [];
 timerEl.innertext= 0
 
 
@@ -66,4 +68,103 @@ var timercheck = setInterval(function() {
 
     }, 1000)
 }
+
+var showScore = function () {
+
+}
+
+var CreateHighScore = function(event) {
+event.preventDefault()
+var playerName = document.querySelector("#enterName").value;
+if(!playerName) {
+alert("Enter your name!");
+return;  
+}
+nameEl.reset();
+}
+
+
+var HighScore = {
+  playerName: playerName,
+  score: score
+  } 
+
+HighScores.push(HighScore);
+HighScores.sort((a, b) => {return b.score-a.score});
+
+for (var i = 0; i < HighScores.length; i++) {
+  var highscoreEl = document.createElement("li");
+  highscoreEl.ClassName = "high-score";
+  highscoreEl.innerHTML = HighScores[i].initials + " - " + HighScores[i].score;
+  playerScoreEl.appendChild(highscoreEl);
+}
+
+var saveHighScore = function () {
+  localStorage.setItem("HighScores", JSON.stringify(HighScores))
+}
+
+var loadHighScore = function () {
+  var LoadedHighScores = localStorage.getItem("HighScores")
+      if (!LoadedHighScores) {
+      return false;
+  }
+
+  LoadedHighScores = JSON.parse(LoadedHighScores);
+  LoadedHighScores.sort((a, b) => {return b.score-a.score})
+
+
+  for (var i = 0; i < LoadedHighScores.length; i++) {
+      var highscoreEl = document.createElement("li");
+      highscoreEl.ClassName = "high-score";
+      highscoreEl.innerText = LoadedHighScores[i].initials + " - " + LoadedHighScores[i].score;
+      listHighScoreEl.appendChild(highscoreEl);
+
+      HighScores.push(LoadedHighScores[i]);
+      
+  }
+}
+
+var displayHighScores = function() {
+
+  scoreEl.classList.remove("hide");
+  scoreEl.classList.add("show");
+  gameover = "true"
+
+  if (recordEl.className = "show") {
+      recordEl.classList.remove("show");
+      recordEl.classList.add("hide");
+      }
+  if (startPageEl.className = "show") {
+      startPageEl.classList.remove("show");
+      startPageEl.classList.add("hide");
+      }
+      
+  if (qPageEl.className = "show") {
+      qPageEl.classList.remove("show");
+      qPageEl.classList.add("hide");
+      }
+
+  if (correctEl.className = "show") {
+      correctEl.classList.remove("show");
+      correctEl.classList.add("hide");
+  }
+
+  if (inCorrectEl.className = "show") {
+      inCorrectEl.classList.remove("show");
+      inCorrectEl.classList.add("hide");
+      }
+  
+}
+var clearScores = function () {
+  HighScores = [];
+
+  while (playerScoreEl.firstChild) {
+      playerScoreEl.removeChild(playerScoreEl.firstChild);
+  }
+
+  localStorage.clear(HighScores);
+
+} 
+
+loadHighScore()
 
