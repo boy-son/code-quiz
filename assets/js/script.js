@@ -7,9 +7,11 @@ var correct = document.getElementById('correct');
 var incorrect = document.getElementById('incorrect');
 var endPage = document.getElementById('end-page');
 var finalScore = document.getElementById('final-score');
-var intials = document.getElementById('initials');
+var initials = document.getElementById('initials');
+var initialBtn = document.getElementById('init-submit')
 var ScoreBoard = document.getElementById('score-board');
 var playerScore = document.getElementById('player-score');
+var navScore = document.getElementById('navScore')
 var backButton = document.getElementById('back-button');
 var clearScore = document.getElementById('clear-score');
 var timer = document.getElementById('time-remaining');
@@ -168,7 +170,7 @@ var answerCheck = function(event) {
       };
 
       QuestionIndex++
-        if  (arrayShuffledQuestions.length > questionList + 1) {
+        if  (shuffleQuestions.length > questionList + 1) {
             nextQuestion();
         }   
         else {
@@ -176,4 +178,123 @@ var answerCheck = function(event) {
            showScore();
             }
 }
-     
+
+var showScore = function () {
+    QuestionPage.classList.add("hide");
+    endPage.classList.remove("hide");
+    endPage.classList.add("show");
+
+    var scoreDisplay = document.createElement("p");
+    scoreDisplay.innerText = ("Your final score is " + score + "!");
+    finalScore.appendChild(scoreDisplay);
+} 
+
+var createScore = function(event) { 
+    event.preventDefault() 
+    var playerInitials = document.querySelector("#initials").value;
+    if (!playerInitials) {
+      alert("Enter your intials!");
+      return;
+    }
+    initials.reset();
+
+    var highScore = {
+        initials: playerInitials,
+        score: score
+        };
+    
+        highScores.push(highScore);
+        highScores.sort((a, b) => {return b.score-a.score});
+    
+        while (playerScore.firstChild) {
+            playerScore.removeChild(playerScore.firstChild)
+         }
+        
+         for (var i = 0; i < highScores.length; i++) {
+            var highscoreEntry = document.createElement("li");
+            highscoreEntry.ClassName = "high-score";
+            highscoreEntry.innerHTML = highScores[i].initials + " - " + highScores[i].score;
+            playerScore.appendChild(highscoreEntry);
+          }
+         saveScore();
+         displayScore();
+        }
+
+
+        var saveHighScore = function () {
+            localStorage.setItem("HighScores", JSON.stringify(highScores))       
+        }
+
+        var loadScore = function() {
+        var loadedScores = localStorage.getitem("HighScores")
+        if(!loadedScores) {
+        return false;    
+        }
+        loadedScores = JSON.parse(loadedScores)
+        loadedScores.sort((a, b) => {return b.score-a.score})
+
+        for (var i = 0; i < loadedScores.length; i++) {
+            var highscoreEntry = document.createElement("li");
+            highscoreEntry.ClassName = "high-score";
+            highscoreEntry.innerText = loadedScores[i].initials + " - " + loadedScores[i].score;
+            playerScore.appendChild(highscoreEntry);
+
+            highScores.push(loadedScores[i]);
+            
+        }
+    }
+        var displayScore = function() {
+
+            ScoreBoard.classList.remove("hide");
+            ScoreBoard.classList.add("show");
+            gameover = "true"
+    
+            if (endPage.className = "show") {
+                endPage.classList.remove("show");
+                endPage.classList.add("hide");
+                }
+            if (startPage.className = "show") {
+                startPage.classList.remove("show");
+                startPage.classList.add("hide");
+                }
+                
+            if (QuestionPage.className = "show") {
+                QuestionPage.classList.remove("show");
+                QuestionPage.classList.add("hide");
+                }
+    
+            if (correct.className = "show") {
+                correct.classList.remove("show");
+                correct.classList.add("hide");
+            }
+    
+            if (wrong.className = "show") {
+                wrong.classList.remove("show");
+                wrong.classList.add("hide");
+                }
+            
+        }
+
+        var clearScores = function () {
+            highScores = [];
+    
+            while (playerScore.firstChild) {
+                playerScore.removeChild(playerScore.firstChild);
+            }
+    
+            localStorage.clear(highScores);
+    
+        } 
+    
+        loadScore();
+
+       
+      startButton.addEventListener("click", startGame)
+
+      initialBtn.addEventListener("submit", createScore)
+    
+      navScore.addEventListener("click", displayScore)
+ 
+      backButton.addEventListener("click", homePage)
+   
+      clearScore.addEventListener("click", clearScores)
