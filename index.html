@@ -15,86 +15,43 @@
     <nav>
       <ul id="nav" class="navigation">
         <li id="navScore">View High Scores</li>
-        <li id="timer">Time: <span id="timeLeft">100</span></li>
+        <li id="timer">Time: <span id="time-remaining"></span></li>
       </ul>
     </nav>
   </header>
 
   <main>
 
-    <section id="startPage">
-      <h1>Quiz!</h1>
-      <p>Click the button below to test your coding knowledge!</p>
-      <button id="startbtn">Start</button>
-
+    <section id="start-page" class="show">
+      <h1>Coding Quiz!</h1>
+      <p>Welcome to the Coding Quiz! <br> Once you start the quiz, there will be 5 questions. <br> Each correct answer is worth 10 points, and each incorrect answer will deduct 5 points and 3 seconds from the timer. <br> Let's get started!</p>
+      <button class="btnstart" id="startbtn">Start</button>
     </section>
 
-    <section class="question-page" id="q-1" style="display: none;">
-      <h1>#1:</h1>
-      <ul>
-        <li value=""></li>
-        <li value=""></li>
-        <li value=""></li>
-        <li value=""></li>
-      </ul>
+    <section id="question-page" class="hide">
+     <div id="question">Question:</div>
+     <div id="answer-buttons" class="btn-grid"></div>  
     </section>
 
-    <section class="question-page" id="q-2" style="display: none;">
-      <h1>#2: </h1>
-      <ul>
-        <li value=""></li>
-        <li value=""></li>
-        <li value=""></li>
-        <li value=""></li>
-      </ul>
+    <div class="hide" id="correct">Correct!</div>
+    <div class="hide" id="incorrect">Incorrect, Try Again!</div>
+
+    <section id="end-page" class="hide">
+      <h1>Well Done!</h1>
+      <p>Your score is: <span id="final-score"></span></p>
+      <p>
+      initials: <input type: text id="initials" max="3">
+      <button id="init-submit">Submit</button>  
+      </p>
     </section>
 
-    <section class="question-page" id="q-3" style="display: none;">
-      <h1>#3:</h1>
-      <ul>
-        <li value=""></li>
-        <li value=""></li>
-        <li value=""></li>
-        <li value=""></li>
-      </ul>
-    </section>
-
-    <section class="question-page" id="q-4" style="display: none;">
-      <h1>#4: </h1>
-      <ul>
-        <li value=""></li>
-        <li value=""></li>
-        <li value=""></li>
-        <li value=""></li>
-      </ul>
-    </section>
-
-    <section class="question-page" id="q-5" style="display: none;">
-      <h1>#5:</h1>
-      <ul>
-        <li value=""></li>
-        <li value=""></li>
-        <li value=""></li>
-        <li value=""></li>
-      </ul>
-    </section>
-
-    <section id="recordScore" style="display: none;">
-      <h1>Well Done</h1>
-      <form>
-        <label for="enterName">Enter Your Name:</label>
-        <textarea name="enterName" id="enterName" placeholder="enter your name"></textarea>
-      </form>
-      <button id="nameButton">Submit</button>
-    </section>
-
-    <section id="scoreBoard" style="display: none;">
+    <section id="score-board" class="hide">
       <h1>High Scores</h1>
 
-      <ol id="playerScore"></ol>
+      <ol id="player-score"></ol>
 
-      <button id="goBack">Go Back</button>
-      <button id="clearScore">Clear High Scores</button>
+      <button id="back-button">Go Back</button>
+      <button id="clear-score">Clear High Scores</button>
 
     </section>
 
