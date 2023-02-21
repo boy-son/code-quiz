@@ -72,11 +72,11 @@ var questions = [
       choices: [{choice: '1. Because it is fun!'}, {choice: '2. To style a page'}, {choice: '3. To give structure to a page'}, {choice: '4. To add functionality to a page'}]
     },
     { q: 'What does the reset.css file do?', 
-      a: '2. Clears a browsers formatting', 
+      a: '2. Removes built-in formatting by the browser', 
       choices: [{choice: '1. nothing'}, {choice: '2. Removes built-in formatting by the browser'}, {choice: '3. Refreshes the page'}, {choice: '4. Resets your style.css file'}]
     },
     { q: 'what would you use to decrement an element', 
-      a: '1. element-- ', 
+      a: '1. element--', 
       choices: [{choice: '1. element--'}, {choice: '2. subtract.element'}, {choice: '3. element.subtract'}, {choice: '4. -element'}]
     },
   ];
@@ -103,15 +103,14 @@ var questions = [
   }
 
 var nextQuestion = function() {
-    resetAnswers()
     displayQuestion(shuffleQuestions[questionList])
 }
 
-var resetAnswers = function() {
-    while (quizChoices.firstChild) {
-        quizChoices.removeChild(quizChoices.firstChild)
-    };
-};
+// var resetAnswers = function() {
+//     while (quizChoices.firstChild) {
+//         quizChoices.removeChild(quizChoices.firstChild)
+//     };
+// };
 
   function startGame() {
     console.log('Started')
@@ -131,8 +130,8 @@ var displayQuestion = function(index) {
     for (var i = 0; i < index.choices.length; i++) {
         var choiceButton = document.createElement('button')
         choiceButton.innerText = index.choices[i].choice
-        choiceButton.classList.add('btn')
-        choiceButton.classList.add('answerbtn')
+        choiceButton.classList.add('button')
+        choiceButton.classList.add('answerbutton')
         choiceButton.addEventListener("click", answerCheck)
         quizQuestion.appendChild(choiceButton)
         }
@@ -142,15 +141,15 @@ var answerCorrect = function() {
         if (correct.className = "hide") {
             correct.classList.remove("hide")
             correct.classList.add("banner")
-            wrong.classList.remove("banner")
-            wrong.classList.add("hide")
+            incorrect.classList.remove("banner")
+            incorrect.classList.add("hide")
             }
 }
 
-var answerWrong = function() {
-    if (wrong.className = "hide") {
-        wrong.classList.remove("hide")
-        wrong.classList.add("banner")
+var answerIncorrect = function() {
+    if (incorrect.className = "hide") {
+        incorrect.classList.remove("hide")
+        incorrect.classList.add("banner")
         correct.classList.remove("banner")
         correct.classList.add("hide")
     }
@@ -159,17 +158,17 @@ var answerWrong = function() {
 var answerCheck = function(event) {
     var currentAnswer = event.target
         if (shuffleQuestions[questionList].a === currentAnswer.innerText){
-            answerCorrect()
-            score = score + 10
+            answerCorrect();
+            score = score + 10;
         }
 
         else {
-          answerWrong()
+          answerIncorrect();
           score = score - 5;
           timeRemaining = timeRemaining - 3;
       };
 
-      QuestionIndex++
+      questionList++
         if  (shuffleQuestions.length > questionList + 1) {
             nextQuestion();
         }   
@@ -185,18 +184,20 @@ var showScore = function () {
     endPage.classList.add("show");
 
     var scoreDisplay = document.createElement("p");
+    scoreDisplay.classList.add('show');
     scoreDisplay.innerText = ("Your final score is " + score + "!");
     finalScore.appendChild(scoreDisplay);
 } 
 
 var createScore = function(event) { 
     event.preventDefault() 
-    var playerInitials = document.querySelector("#initials").value;
+    var playerInitials = document.getElementById("initials").value;
     if (!playerInitials) {
       alert("Enter your intials!");
       return;
     }
-    initials.reset();
+    
+     initials.reset()
 
     var highScore = {
         initials: playerInitials,
@@ -221,12 +222,12 @@ var createScore = function(event) {
         }
 
 
-        var saveHighScore = function () {
+        var saveScore = function () {
             localStorage.setItem("HighScores", JSON.stringify(highScores))       
         }
 
         var loadScore = function() {
-        var loadedScores = localStorage.getitem("HighScores")
+        var loadedScores = localStorage.getItem("HighScores")
         if(!loadedScores) {
         return false;    
         }
@@ -262,15 +263,15 @@ var createScore = function(event) {
                 QuestionPage.classList.remove("show");
                 QuestionPage.classList.add("hide");
                 }
-    
+
             if (correct.className = "show") {
                 correct.classList.remove("show");
                 correct.classList.add("hide");
             }
     
-            if (wrong.className = "show") {
-                wrong.classList.remove("show");
-                wrong.classList.add("hide");
+            if (incorrect.className = "show") {
+                incorrect.classList.remove("show");
+                incorrect.classList.add("hide");
                 }
             
         }
@@ -289,9 +290,9 @@ var createScore = function(event) {
         loadScore();
 
        
-      startButton.addEventListener("click", startGame)
+      startButton.addEventListener("click", startGame);
 
-      initialBtn.addEventListener("submit", createScore)
+      initialBtn.addEventListener("click", createScore);
     
       navScore.addEventListener("click", displayScore)
  
